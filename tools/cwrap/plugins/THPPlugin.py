@@ -15,6 +15,9 @@ class THPPlugin(CWrapPlugin):
         'THBoolTensor*':    Template('((THPBoolTensor*)$arg)->cdata'),
         'THIndexTensor*':   Template('((THPIndexTensor*)$arg)->cdata'),
 
+        'THCudaTensor*':    Template('((THCPFloatTensor*)$arg)->cdata'),
+        'THCudaDoubleTensor*': Template('((THCPDoubleTensor*)$arg)->cdata'),
+
         'THSFloatTensor*':  Template('((THSPFloatTensor*)$arg)->cdata'),
         'THSDoubleTensor*': Template('((THSPDoubleTensor*)$arg)->cdata'),
         'THSLongTensor*':   Template('((THSPLongTensor*)$arg)->cdata'),
@@ -47,6 +50,9 @@ class THPPlugin(CWrapPlugin):
         'THTensor*':        Template('(PyObject*)Py_TYPE($arg) == THPTensorClass'),
         'THBoolTensor*':    Template('(PyObject*)Py_TYPE($arg) == THPBoolTensorClass'),
         'THIndexTensor*':   Template('(PyObject*)Py_TYPE($arg) == THPIndexTensorClass'),
+
+        'THCudaTensor*':   Template('(PyObject*)Py_TYPE($arg) == THCPFloatTensorClass'),
+        'THCudaDoubleTensor*':  Template('(PyObject*)Py_TYPE($arg) == THCPDoubleTensorClass'),
 
         'THSDoubleTensor*': Template('(PyObject*)Py_TYPE($arg) == THSPDoubleTensorClass'),
         'THSFloatTensor*':  Template('(PyObject*)Py_TYPE($arg) == THSPFloatTensorClass'),
@@ -159,6 +165,8 @@ ${cpu}
         'THIndexTensor*': '" THPModuleStr "LongTensor',
         'THFloatTensor*': '" THPModuleStr "FloatTensor',
         'THDoubleTensor*': '" THPModuleStr "DoubleTensor',
+        'THCudaTensor*': 'torch.cuda.FloatTensor',
+        'THCudaDoubleTensor*': 'torch.cuda.DoubleTensor',
         'THSize*': 'torch.Size',
         'THStride*': 'tuple',
         'long': 'int',
